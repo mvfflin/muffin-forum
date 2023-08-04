@@ -46,12 +46,14 @@ export const LoginPage = () => {
                 status: "error",
             });
         } else if (res.status === 200) {
+            console.log(res.data.findUser.username);
             signIn({
                 token: res.data.token,
                 tokenType: "Bearer",
                 expiresIn: 30,
                 authState: {
                     token: res.data.token,
+                    username: res.data.findUser.username,
                 },
             });
         }

@@ -70,8 +70,12 @@ export const Users = () => {
                 <title>Users</title>
             </Helmet>
             <VStack>
-                <Center mb={10}>
+                <Text my={0} mx={3} fontWeight={"bold"} fontSize={"xl"}>
+                    Search
+                </Text>
+                <Center>
                     <Input
+                        mb={10}
                         onChange={(e: any) => {
                             setQuery(e.target.value);
                         }}

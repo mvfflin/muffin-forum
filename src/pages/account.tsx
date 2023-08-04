@@ -39,7 +39,6 @@ export const AccountPage = () => {
                 }
             );
             const json = await res.data;
-            console.log(json);
             if (res.status === 201) {
                 return setUserData(null);
             } else if (res.status === 203) {

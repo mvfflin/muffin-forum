@@ -8,12 +8,11 @@ import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
 import { TypedWelcome } from "../components/typing";
 import jwt_decode from "jwt-decode";
 import { UserJson } from "../interface/userJson";
+import { useEffect, useState } from "react";
 
 export const Home = () => {
     const isAuthed = useIsAuthenticated();
     const authUser = useAuthUser();
-    const token = authUser()!.token;
-    const decoded: UserJson = jwt_decode(token);
 
     if (!isAuthed()) {
         return (
@@ -74,7 +73,9 @@ export const Home = () => {
                     p={100}
                 >
                     <Text fontFamily="Cairo Play" color="white" fontSize="6xl">
-                        <TypedWelcome strings={[`Hi ${decoded.username}!`]} />
+                        <TypedWelcome
+                            strings={[`Hi ${authUser()!.username}!`]}
+                        />
                     </Text>
                     <Text color="gray.400" mt={-2} mb={2} fontSize="lg">
                         You can press account button to go to your account page

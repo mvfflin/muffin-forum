@@ -69,9 +69,8 @@ export const RegisterPage = () => {
                 expiresIn: 30,
                 tokenType: "Bearer",
                 authState: {
-                    id: res.data.id,
+                    token: res.data.token,
                     username: res.data.username,
-                    email: res.data.email,
                 },
             });
 

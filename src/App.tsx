@@ -30,7 +30,7 @@ function App() {
             <Helmet>
                 <title>muffin forum</title>
             </Helmet>
-            <AuthProvider authType="cookie" authName="_auth" cookieSecure>
+            <AuthProvider authType="cookie" authName="_auth">
                 <ChakraProvider theme={theme}>
                     <ColorModeScript initialColorMode="light" />
                     <Navigator />
