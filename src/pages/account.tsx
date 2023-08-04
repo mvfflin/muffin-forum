@@ -32,10 +32,14 @@ export const AccountPage = () => {
 
     useEffect(() => {
         const getUserData = async () => {
-            const res = await axios(`/api/users/getid/${decoded.id}`, {
-                method: "POST",
-            });
-            const json = res.data;
+            const res = await axios.get(
+                `http://localhost:1231/api/users/user/`,
+                {
+                    params: { id: decoded.id },
+                }
+            );
+            const json = await res.data;
+            console.log(json);
             if (res.status === 201) {
                 return setUserData(null);
             } else if (res.status === 203) {
@@ -56,7 +60,7 @@ export const AccountPage = () => {
         const response = await axios(
             `/api/account/admin/${decoded.id}/changedescription`,
             {
-                method: "POST",
+                method: "PATCH",
                 data: {
                     description: descValue,
                 },

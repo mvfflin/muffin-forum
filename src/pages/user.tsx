@@ -1,6 +1,5 @@
 import {
     Avatar,
-    Badge,
     Box,
     Button,
     Center,
@@ -15,27 +14,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BadgesType, UserJson } from "../interface/userJson";
+import { setToast } from "../utils/toast";
 
 export const ViewUser = () => {
     const { username } = useParams();
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>("");
     const [user, setUserData] = useState<UserJson | null>(null);
+    const { makeToast } = setToast();
 
     useEffect(() => {
         const getUserData = async () => {
-            const res = await axios(`/api/users/getusername/${username}`, {
-                method: "POST",
+            const res = await axios(`http://localhost:1231/api/users/user`, {
+                method: "GET",
+                params: { username: username },
             });
             const userData = await res.data;
             if (res.status === 201) {
                 setUserData(null);
-                return setError("Can't find that user.");
+                setError("Can't find that user.");
+                return makeToast({
+                    title: "Error",
+                    message: error,
+                    status: "error",
+                });
             } else if (res.status === 202) {
                 setUserData(null);
-                return setError("Unknown error, contact mvfflin");
+                setError("Unknown error, contact mvfflin");
+                return makeToast({
+                    title: "Error",
+                    message: error,
+                    status: "error",
+                });
             } else {
                 console.log(userData);
-                setError(null);
+                setError("");
                 return setUserData(userData);
             }
         };
