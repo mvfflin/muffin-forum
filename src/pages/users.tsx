@@ -122,7 +122,7 @@ export const Users = () => {
                                                 mt={-8}
                                                 mb={2}
                                                 size="lg"
-                                                src={skinnybeautiful}
+                                                src={user.avatarUrl}
                                                 name={user.username}
                                                 // onclick go to user view page
                                             />

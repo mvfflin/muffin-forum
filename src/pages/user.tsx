@@ -69,7 +69,11 @@ export const ViewUser = () => {
                     {user != null ? (
                         <>
                             {" "}
-                            <Avatar size={"xl"} name={user?.username} />
+                            <Avatar
+                                size={"xl"}
+                                name={user?.username}
+                                src={user?.avatarUrl}
+                            />
                             <Text fontSize="4xl" color="white" mt={5} mb={3}>
                                 {user?.username}
                             </Text>

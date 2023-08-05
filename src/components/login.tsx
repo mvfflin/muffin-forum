@@ -126,6 +126,7 @@ export const LoginPage = () => {
                 >
                     <FormLabel>Password</FormLabel>
                     <Input
+                        type={"password"}
                         p={5}
                         variant="flushed"
                         borderColor="gray.900"
