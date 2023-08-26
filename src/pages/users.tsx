@@ -64,7 +64,7 @@ export const Users = () => {
         <title>Users</title>
       </Helmet>
       <VStack>
-        <Text my={0} mx={3} fontWeight={"bold"} fontSize={"xl"}>
+        <Text my={0} mx={3} fontWeight={"bold"} fontSize={"xl"} color={"white"}>
           Search
         </Text>
         <Center>
