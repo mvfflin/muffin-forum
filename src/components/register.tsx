@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { delay } from "../utils/delayFnc";
 import { useSignIn } from "react-auth-kit";
 import { setToast } from "../utils/toast";
+import { axiosInstance } from "../utils/axios";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const RegisterPage = () => {
     const { makeToast } = setToast();
 
     const beforeRegist = async () => {
-        const res = await axios("/api/auth/register", {
+        const res = await axiosInstance("/api/auth/register", {
             method: "POST",
             data: {
                 username: formik.values.username,

@@ -14,6 +14,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BadgesType, UserJson } from "../interface/userJson";
+import { axiosInstance } from "../utils/axios";
 import { setToast } from "../utils/toast";
 
 export const ViewUser = () => {
@@ -24,7 +25,7 @@ export const ViewUser = () => {
 
     useEffect(() => {
         const getUserData = async () => {
-            const res = await axios(`http://localhost:1231/api/users/user`, {
+            const res = await axiosInstance(`/api/users/user`, {
                 method: "GET",
                 params: { username: username },
             });

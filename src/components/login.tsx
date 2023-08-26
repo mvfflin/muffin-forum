@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { axiosInstance } from "../utils/axios";
 import { delay } from "../utils/delayFnc";
 import { setToast } from "../utils/toast";
 
@@ -23,7 +24,7 @@ export const LoginPage = () => {
     const { makeToast } = setToast();
 
     const loginSubmit = async () => {
-        const res = await axios.post("/api/auth/login", {
+        const res = await axiosInstance.post("/api/auth/login", {
             username: formik.values.username,
             password: formik.values.password,
         });
