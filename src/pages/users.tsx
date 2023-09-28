@@ -24,38 +24,40 @@ import "@fontsource/exo";
 import { BadgesType, UserJson, UserJsonFix } from "../interface/userJson";
 import { FiUser } from "react-icons/fi";
 import { axiosInstance } from "../utils/axios";
+import { setToast } from "../utils/toast";
 
 export const Users = () => {
-  const [users, setUsers] = useState<
+  const [users, setAllUsers] = useState<
     UserJsonFix | UserJson[] | undefined | null
   >(null);
   const [searchInput, setQuery] = useState<string>("");
+  const { makeToast } = setToast();
 
   useEffect(() => {
     const fetchRes = async () => {
-      const res = await axiosInstance("/api/users/", {
-        method: "GET",
-      });
-      const json = res.data;
-      console.log(json);
-      if (res.status === 201) {
-        return setUsers(null);
-      } else if (res.status === 200) {
-        console.log(json);
-        return setUsers(json);
+      try {
+        const res = await axiosInstance("/api/users/", {
+          method: "GET",
+          params: {
+            search: searchInput,
+          },
+        });
+        const json = res.data;
+        if (res.status === 201) {
+          return setAllUsers(null);
+        } else if (res.status === 200) {
+          return setAllUsers(json);
+        }
+      } catch (error) {
+        console.log(error);
+        return makeToast({
+          title: "Error",
+          message: "Failed to fetch users!",
+          status: "error",
+        });
       }
     };
-    const searchUser = users?.filter((user: UserJson) =>
-      user.username.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    if (searchInput == "") {
-      fetchRes();
-    } else if (searchUser === undefined && searchInput != "") {
-      setUsers(null);
-    }
-
-    console.log(searchUser);
-    return setUsers(searchUser);
+    fetchRes();
   }, [searchInput]);
 
   return (
